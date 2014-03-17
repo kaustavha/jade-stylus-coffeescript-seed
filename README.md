@@ -6,7 +6,11 @@ The gulpfile only compiles the three src files with their current names, no dire
 
 ## Steps:
 From the command line, navigate to the main directory and run
-'''npm install'''
-'''gulp'''
+'''
+npm install
+'''
+'''
+gulp
+'''
 
 Gulp returns an index.html in the main directory, and scripts.js and styles.css in the assets directory. It will also watch  files in the src directory for changes and recompile. 
