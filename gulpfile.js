@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     coffee = require('gulp-coffee');
 
 gulp.task('templates', function() {
-	var locs = {};	 
+	var locs = {};
 	gulp.src('./src/jade.jade')
 	    .pipe(jade({locals: locs}))
 	    .pipe(rename('index.html'))
