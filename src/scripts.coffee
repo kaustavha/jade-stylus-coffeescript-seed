@@ -6,7 +6,7 @@ append = (ele, txt) ->
 class Text
   constructor: (@name) ->
 
-  write: (label) -> 
+  write: (label) ->
     str = "Scripted lorem ipsum text - #{label} - " + @name
     append(document.body, str)
 
@@ -26,7 +26,7 @@ class Baz
 a = new Foo "1"
 b = new Bar "2"
 a.write()
-b.write()    
+b.write()
 document.onreadystatechange = () ->
   if document.readyState is "complete"
     c = new Baz
