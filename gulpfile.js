@@ -18,7 +18,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('styles', function() {
-  gulp.src('./src/stylus.styl')
+  gulp.src('./src/styles.styl')
     .pipe(stylus())
     .pipe(gulp.dest('./assets'))
 });
