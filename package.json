@@ -14,5 +14,8 @@
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
     "gulp-stylus": "latest"
+  },
+  "dependencies": {
+    "browser-sync": "^2.5.2"
   }
 }
