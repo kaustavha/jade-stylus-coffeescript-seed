@@ -1,8 +1,9 @@
-#jade-stylus-coffeescript-seed
+# jade-stylus-coffeescript-seed
 
 This is an ultra minimal seed for building static websites with JADE, stylus and coffeescript. GulpJS is used to build. 
-The source files are in the src directory.
-The gulpfile only compiles the three src files with their current names, no directory walker or options for multiple sources is included currently. 
+The source files are in the src directory. 
+Any files in subdirectories inside  ./src of type jade/styl/coffee will get compiled and outputted to ./public, browsersync will then serve up ./public. 
+To add images or vendor files(e.g jquery), you can directly add them inside ./public, or add a gulp task to copy from ./src as you see fit. 
 
 ## Steps:
 From the command line, navigate to the main directory and run, prepend a sudo as you see fit.  
@@ -10,5 +11,3 @@ From the command line, navigate to the main directory and run, prepend a sudo as
 npm install
 gulp
 ```
-
-Gulp returns an index.html in the main directory, and scripts.js and styles.css in the assets directory. It will also watch  files in the src directory for changes and recompile. 
