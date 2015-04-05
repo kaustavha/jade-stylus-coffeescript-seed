@@ -37,6 +37,10 @@ gulp.task('browserSync', ['build'], function() {
   });
 });
 
+gulp.task('clean', function() {
+  gulp.src(['./public/assets', './public/index.html'], {read: false}).pipe(clean());
+});
+
 //define cmd line default task
 gulp.task('build', ['templates', 'styles', 'scripts']);
 gulp.task('default', ['build', 'watch', 'browserSync']);

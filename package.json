@@ -9,11 +9,12 @@
     "url": "https://github.com/kaustavha/jade-stylus-coffeescript-seed.git"
   },
   "devDependencies": {
+    "browser-sync": "latest",
     "gulp": "latest",
-    "gulp-util": "latest",
+    "gulp-clean": "^0.3.1",
     "gulp-coffee": "latest",
     "gulp-jade": "latest",
     "gulp-stylus": "latest",
-    "browser-sync": "latest"
+    "gulp-util": "latest"
   }
 }
