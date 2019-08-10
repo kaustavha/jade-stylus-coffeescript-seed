@@ -1,46 +1,85 @@
-var gulp = require('gulp'),
-    log = require('gulp-util').log,
-    jade = require('gulp-jade'),
-    stylus = require('gulp-stylus'),
-    coffee = require('gulp-coffee'),
-    browserSync = require('browser-sync');
+const gulp = require('gulp');
+const stylus = require('gulp-stylus');
+const jade = require('gulp-pug');
+const babel = require('gulp-babel');
+const cleanCSS = require('gulp-clean-css');
+const del = require('del');
+const browserSync = require('browser-sync');
 
-gulp.task('templates', function() {
-  var locs = {};
-  gulp.src('./src/**/*.jade')
-    .pipe(jade({locals: locs}))
-    .pipe(gulp.dest('./public'))
-});
+const paths = {
+  styles: {
+    src: 'src/**/*.styl',
+    dest: 'public/assets/'
+  },
+  scripts: {
+    src: 'src/**/*.js',
+    dest: 'public/assets/'
+  },
+  templates: {
+      src: './src/**/*.jade',
+      dest: 'public'
+  }
+};
 
-gulp.task('scripts', function() {
-  gulp.src('./src/**/*.coffee')
-    .pipe(coffee({bare: true}).on('error', log))
-    .pipe(gulp.dest('./public/assets'))
-});
+function serve() {
+    browserSync({
+      server: {
+        baseDir: './public'
+      }
+    });
+  };
 
-gulp.task('styles', function() {
-  gulp.src('./src/**/*.styl')
+/* Not all tasks need to use streams, a gulpfile is just another node program
+ * and you can use all packages available on npm, but it must return either a
+ * Promise, a Stream or take a callback and call it
+ */
+function clean() {
+  // You can use multiple globbing patterns as you would with `gulp.src`,
+  // for example if you are using del 2.0 or above, return its promise
+  return del([ 'public/assets' ]);
+}
+
+/*
+ * Define our tasks using plain functions
+ */
+function styles() {
+  return gulp.src(paths.styles.src)
     .pipe(stylus())
-    .pipe(gulp.dest('./public/assets'))
-});
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(paths.styles.dest));
+}
 
-gulp.task('watch', function() {
-	log('Watching files');
-	gulp.watch('./src/**/*', ['build']);
-});
+function scripts() {
+  return gulp.src(paths.scripts.src, { sourcemaps: true })
+    .pipe(babel())
+    .pipe(gulp.dest(paths.scripts.dest));
+}
 
-gulp.task('browserSync', ['build'], function() {
-  browserSync({
-    server: {
-      baseDir: './public'
-    }
-  });
-});
+function watch() {
+  gulp.watch(paths.scripts.src, scripts);
+  gulp.watch(paths.styles.src, styles);
+}
 
-gulp.task('clean', function() {
-  gulp.src(['./public/assets', './public/index.html'], {read: false}).pipe(clean());
-});
+function templates() {
+  var locs = {};
+  return gulp.src(paths.templates.src)
+    .pipe(jade({locals: locs}))
+    .pipe(gulp.dest(paths.templates.dest))
+}
+/*
+ * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
+ */
+var build = gulp.series(clean, gulp.parallel(styles, scripts, templates), serve);
 
-//define cmd line default task
-gulp.task('build', ['templates', 'styles', 'scripts']);
-gulp.task('default', ['build', 'watch', 'browserSync']);
+/*
+ * You can use CommonJS `exports` module notation to declare tasks
+ */
+exports.clean = clean;
+exports.styles = styles;
+exports.scripts = scripts;
+exports.watch = watch;
+exports.build = build;
+/*
+ * Define default task that can be called by just running `gulp` from cli
+ */
+exports.default = build;

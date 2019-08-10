@@ -1,7 +1,7 @@
 {
   "name": "jade-stylus-coffeescript-seed",
   "author": "kaustavha",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A minimalist boilerplate for getting started writing web apps/pages with modern front end transpilers",
   "license": "MIT",
   "repository": {
@@ -9,12 +9,23 @@
     "url": "https://github.com/kaustavha/jade-stylus-coffeescript-seed.git"
   },
   "devDependencies": {
-    "browser-sync": "latest",
-    "gulp": "latest",
-    "gulp-clean": "^0.3.1",
-    "gulp-coffee": "latest",
-    "gulp-jade": "latest",
-    "gulp-stylus": "latest",
-    "gulp-util": "latest"
-  }
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "browser-sync": "^2.26.7",
+    "coffee-script": "^1.12.7",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-coffee": "^3.0.3",
+    "gulp-jade": "^1.1.0",
+    "gulp-stylus": "^2.7.0",
+    "gulp-util": "^3.0.8",
+    "pug": "^2.0.4",
+    "stylus": "^0.54.5",
+    "del": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-pug": "^3.0.0"
+  },
+  "dependencies": {}
 }
